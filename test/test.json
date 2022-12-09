@@ -1,0 +1,16 @@
+{
+  "data": {
+    "id": 16,
+    "phone_number": "507257530",
+    "name": "Ahmed Abo Elfadle",
+    "email": "arabea109@gmail.com",
+    "longitude": "31.254",
+    "latitude": "31.201",
+    "mac_addrss": "70:01:8c:00:23:ad"
+  },
+  "message": "The phone number has already been taken. (and 1 more error)",
+  "errors": {
+    "phone_number": ["The phone number has already been taken."],
+    "mac_address": ["The mac address has already been taken."]
+  }
+}

@@ -73,4 +73,5 @@ class AppStrings {
   static const String locationServiceDisabled = "location_service_disabled" ;
   static const String locationPermissionDenied = "" ;
   static const String locationPermissionPermanentlyDenied = "location_permission_permanently_denied" ;
+
 }
