@@ -14,14 +14,25 @@ class AppStrings {
   static const String mobileNumber = "mobile_number_hint";
   static const String usernameError = "invalid_user_name";
   static const String passwordError = "invalid_password";
+  static const String signInWelcomeText = "sign_in_welcome_text";
+  static const String signUpWelcomeText = "sign_up_welcome_text";
   static const String password = "password_hint";
-  static const String login = "login_button";
+  static const String confirmPassword = "confirm_password_hint";
+  static const String signIn = "signIn_button";
+  static const String signUp = "signUp_button";
+  static const String emailOrPhone = "email_or_phone_number_hint";
   static const String forgetPassword = "forgot_password_text";
   static const String registerText = "register_text";
+  static const String dontHaveAnAccount = "don't_have_an_account";
   static const String loading = "loading";
   static const String retry_again = "retry_again";
   static const String ok = "ok";
   static const String emailHint = 'email_hint';
+  static const String locationHint = 'location_hint';
+  static const String accessLocation = 'access_location';
+  static const String allow = 'allow';
+  static const String deny = 'deny';
+  static const String customerNameHint = 'customer_name_hint';
   static const String invalidEmail = "invalid_email";
   static const String resetPassword = "reset_password";
   static const String success = "success";
@@ -57,4 +68,9 @@ class AppStrings {
   static const String defaultError = "default_error";
   static const String cacheError = "cache_error";
   static const String noInternetError = "no_internet_error";
+
+  // location
+  static const String locationServiceDisabled = "location_service_disabled" ;
+  static const String locationPermissionDenied = "" ;
+  static const String locationPermissionPermanentlyDenied = "location_permission_permanently_denied" ;
 }

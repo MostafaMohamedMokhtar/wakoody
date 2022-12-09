@@ -4,7 +4,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wakoody/app/app_prefs.dart';
+import 'package:wakoody/utils/resources/routes_manager.dart';
 import 'package:wakoody/utils/resources/strings_manager.dart';
+import 'package:wakoody/utils/resources/theme_manager.dart';
 
 class MyApp extends StatefulWidget {
   MyApp._internal(); // private named constructor
@@ -38,22 +40,9 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       debugShowCheckedModeBanner: false,
-      // onGenerateRoute: RouteGenerator.getRoute,
-      // initialRoute: Routes.splashRoute,
-      // theme: getApplicationTheme(),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text(AppStrings.skip).tr(),
-        ),
-        body: Container() ,
-        floatingActionButton: FloatingActionButton(
-          onPressed: (){
-            _appPreferences.changeAppLanguage();
-            Phoenix.rebirth(context);
-          },
-          child: const Icon(Icons.language),
-        ),
-      ),
+      onGenerateRoute: RouteGenerator.getRoute,
+      initialRoute: Routes.splashRoute,
+      theme: getApplicationTheme(),
     );
   }
 }
