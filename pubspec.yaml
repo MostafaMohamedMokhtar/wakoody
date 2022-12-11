@@ -21,6 +21,10 @@ dependencies:
   geocoding: ^2.0.5  #  get address from coordinates
   geolocator: ^9.0.2  # get the location
   fluttertoast: ^8.1.1 # show toast message on the screen
+  file_picker: ^5.2.3
+#  path_provider: ^2.0.11
+#  image_gallery_saver: ^1.7.1
+  image_picker: ^0.8.6
 
 dev_dependencies:
   flutter_test:
