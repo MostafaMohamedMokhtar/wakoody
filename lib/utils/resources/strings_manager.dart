@@ -16,6 +16,7 @@ class AppStrings {
   static const String passwordError = "invalid_password";
   static const String signInWelcomeText = "sign_in_welcome_text";
   static const String signUpWelcomeText = "sign_up_welcome_text";
+  static const String otpWelcomeText = "otp_welcome_text";
   static const String password = "password_hint";
   static const String confirmPassword = "confirm_password_hint";
   static const String signIn = "signIn_button";
@@ -25,6 +26,7 @@ class AppStrings {
   static const String registerText = "register_text";
   static const String dontHaveAnAccount = "don't_have_an_account";
   static const String loading = "loading";
+  static const String verification = "verification";
   static const String retry_again = "retry_again";
   static const String ok = "ok";
   static const String emailHint = 'email_hint';

@@ -3,31 +3,69 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geolocator_platform_interface/src/models/position.dart';
+import 'package:wakoody/model/register/register_request_model.dart';
+import 'package:wakoody/model/register/register_response_model.dart';
+import 'package:wakoody/network/register_service.dart';
 import 'package:wakoody/services/location_service.dart';
 import 'package:wakoody/utils/location_dialog.dart';
+import 'package:wakoody/utils/locator.dart';
+import 'package:wakoody/utils/mac_address.dart';
 import 'package:wakoody/utils/resources/assets_manager.dart';
 import 'package:wakoody/utils/resources/color_manager.dart';
 import 'package:wakoody/utils/resources/strings_manager.dart';
 import 'package:wakoody/utils/resources/values_manager.dart';
 import 'package:wakoody/viewmodel/register_viewmodel.dart';
 
-class RegisterView extends StatefulWidget {
+class RegisterView extends ConsumerStatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
 
   @override
-  State<RegisterView> createState() => _RegisterViewState();
+  RegisterViewState createState() => RegisterViewState();
 }
 
-class _RegisterViewState extends State<RegisterView> {
+class RegisterViewState extends ConsumerState<RegisterView> {
+  TextEditingController customerNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController locationController = TextEditingController();
-  RegisterViewModel registerViewModel = RegisterViewModel();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+
+  RegisterViewModel? registerViewModel  ;
+  // = RegisterViewModel( RegisterDataRepositoryImp())  ;
 
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      registerViewModel.loadImage();
+      registerViewModel = ref.read(registerProvider);
+      registerViewModel?.loadImage();
     });
     super.initState();
+  }
+
+  _bind() async{
+
+    Position? myPosition =
+        ref.watch(locationProvider).currentPosition;
+    RegisterRequestModel requestModel  = RegisterRequestModel() ;
+    // = locator<RegisterRequestModel>();
+
+    String? platformMacAddress = ref.watch(deviceMacAddressProvider).platformVersion;
+    print('macAddress: $platformMacAddress');
+
+    requestModel.name = customerNameController.text ;
+    requestModel.password = passwordController.text ;
+    if(emailController.text.contains('@')){
+      requestModel.email = emailController.text ;
+    }else{
+      requestModel.phoneNumber = emailController.text ;
+    }
+    requestModel.latitude = myPosition?.latitude.toString();
+    requestModel.longitude = myPosition?.longitude.toString();
+    requestModel.macAddress = platformMacAddress ;
+
+   await registerViewModel?.register(requestModel);
+
   }
 
   @override
@@ -41,7 +79,6 @@ class _RegisterViewState extends State<RegisterView> {
                 builder: (ctx, ref, child) {
                   var imageProvider = ref.read(registerProvider);
                   File? image = ref.watch(registerProvider).image;
-                  ref.watch(registerProvider).imagePath ;
                  // String? imagePath = ref.read(registerProvider).imagePath;
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -124,6 +161,7 @@ class _RegisterViewState extends State<RegisterView> {
                                     ),
                                     onPressed: () async{
                                       _showPicker(context, imageProvider, image);
+                                      registerViewModel?.loadImage() ;
                                     },
                                   ),
                                 ),
@@ -179,7 +217,7 @@ class _RegisterViewState extends State<RegisterView> {
                                 hintText: AppStrings.locationHint.tr(),
                                 suffixIcon: IconButton(
                                   icon: const Icon(Icons.my_location),
-                                  onPressed: () async {
+                                  onPressed: () {
                                     showDialog(
                                         barrierDismissible: false,
                                         context: context,
@@ -227,7 +265,10 @@ class _RegisterViewState extends State<RegisterView> {
                               margin:
                                   const EdgeInsets.only(bottom: AppMargin.m20),
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () async{
+                                  await _bind() ;
+                                  print('mokh correct');
+                                },
                                 style:
                                     Theme.of(context).elevatedButtonTheme.style,
                                 child: Text(AppStrings.signUp.tr()),
@@ -299,6 +340,10 @@ class _RegisterViewState extends State<RegisterView> {
   @override
   void dispose() {
     locationController.dispose();
+    customerNameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
     super.dispose();
   }
 }

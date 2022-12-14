@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wakoody/utils/locator.dart';
 import 'package:wakoody/utils/resources/color_manager.dart';
 import 'package:wakoody/utils/resources/language_manager.dart';
 
@@ -15,7 +16,7 @@ void main() async{
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: ColorManager.white
   ));
-
+ // setupLocator();
   runApp(
        ProviderScope(
          child: EasyLocalization(

@@ -38,18 +38,4 @@ Widget openLocationDialog(BuildContext context){
   );
 } // end openLocationDialog()
 
-/*class LocationDialog extends StatelessWidget {
-  const LocationDialog({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (BuildContext ctx){
-          return openLocationDialog();
-        }
-    );
-    return Container() ;
-  }
-}*/
 

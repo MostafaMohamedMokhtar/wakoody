@@ -4,17 +4,31 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wakoody/model/register/register_request_model.dart';
+import 'package:wakoody/model/register/register_response_model.dart';
+import 'package:wakoody/network/register_service.dart';
+import 'package:wakoody/utils/locator.dart';
 
 final registerProvider = ChangeNotifierProvider<RegisterViewModel>((ref) {
-  return RegisterViewModel();
+
+  return RegisterViewModel(RegisterDataRepositoryImp());
 });
 
 class RegisterViewModel extends ChangeNotifier {
+   RegisterDataRepository? registerRepo  ;
+   RegisterResponseModel? responseModel  ;
+
+  RegisterViewModel(this.registerRepo);
   String? imagePath;
 
   final picker = ImagePicker();
   File? image;
   SharedPreferences? preferences;
+
+  Future<void> register(RegisterRequestModel registerRequestModel) async{
+    responseModel = await registerRepo?.register(registerRequestModel);
+    notifyListeners();
+}
 
   void saveImage(String? path) async {
     preferences = await SharedPreferences.getInstance();

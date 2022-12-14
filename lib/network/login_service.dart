@@ -6,14 +6,14 @@ import 'package:wakoody/model/login/login_response_model.dart';
 import 'package:http/http.dart' as http;
 
 abstract class LoginDataRepository {
-  Future<LoginResponseModel> login(LoginRequestModel loginRequestModel);
+  Future<LoginResponseModel?> login(LoginRequestModel loginRequestModel);
 }
 
 class LoginDataRepositoryImp extends LoginDataRepository {
   static const String endpoint = 'login';
 
   @override
-  Future<LoginResponseModel> login(LoginRequestModel loginRequestModel) async {
+  Future<LoginResponseModel?> login(LoginRequestModel loginRequestModel) async {
     final http.Response response = await http.post(
         Uri.parse(Constant.baseUrl + endpoint),
         headers: {
@@ -23,7 +23,12 @@ class LoginDataRepositoryImp extends LoginDataRepository {
         },
         body: jsonEncode(loginRequestModel.toJson())
     );
-    Map<String , dynamic> parsedData = jsonDecode(response.body);
-    return LoginResponseModel.fromJson(parsedData);
+    print('response = $response');
+    if(response.statusCode == 200 ) {
+      Map<String, dynamic> parsedData = jsonDecode(response.body);
+      print('parsed === : $parsedData');
+      return LoginResponseModel.fromJson(parsedData);
+    }
+    return null ;
   } // end login()
 } // end class

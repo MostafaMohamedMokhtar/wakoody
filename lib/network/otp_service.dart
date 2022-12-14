@@ -6,14 +6,14 @@ import 'package:wakoody/model/otp/otp_request_model.dart';
 import 'package:wakoody/model/otp/otp_response_model.dart';
 
 abstract class OtpDataRepository {
-  Future<OtpResponseModel> verifyOtp(OtpRequestModel otpRequestModel);
+  Future<OtpResponseModel?> verifyOtp(OtpRequestModel otpRequestModel);
 }
 
 class OtpDataRepositoryImp extends OtpDataRepository {
   static const String endpoint = 'verify-otp';
 
   @override
-  Future<OtpResponseModel> verifyOtp(OtpRequestModel otpRequestModel) async {
+  Future<OtpResponseModel?> verifyOtp(OtpRequestModel otpRequestModel) async {
     final http.Response response = await http.post(
         Uri.parse(Constant.baseUrl + endpoint),
         headers: {
@@ -23,7 +23,12 @@ class OtpDataRepositoryImp extends OtpDataRepository {
         },
         body: jsonEncode(otpRequestModel.toJson())
     );
-    Map<String , dynamic> parsedData = jsonDecode(response.body);
-    return OtpResponseModel.fromJson(parsedData);
+    print('response = $response');
+    if(response.statusCode == 200 ) {
+      Map<String, dynamic> parsedData = jsonDecode(response.body);
+      print('parsed === : $parsedData');
+      return OtpResponseModel.fromJson(parsedData);
+    }
+    return null ;
   } // end login()
 } // end class
