@@ -1,5 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:wakoody/model/login/login_request_model.dart';
+import 'package:wakoody/network/login_service.dart';
 import 'package:wakoody/services/location_service.dart';
 import 'package:wakoody/utils/resources/color_manager.dart';
 import 'package:wakoody/utils/resources/routes_manager.dart';
@@ -7,6 +10,7 @@ import 'package:wakoody/utils/resources/strings_manager.dart';
 import 'package:wakoody/utils/resources/styles_manager.dart';
 import 'package:wakoody/utils/resources/values_manager.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wakoody/viewmodel/login_viewmodel.dart';
 
 
 class LoginView extends StatefulWidget {
@@ -17,6 +21,46 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
+
+  final TextEditingController _emailOrPhoneController = TextEditingController();
+
+  final TextEditingController _passwordController = TextEditingController();
+  LoginRequestModel? loginRequestModel = LoginRequestModel() ;
+
+  Future<void> signIn(WidgetRef ref) async{
+    String emailOrPhone = _emailOrPhoneController.text.trim() ;
+    String password = _passwordController.text.trim();
+    loginRequestModel?.phoneNumber = emailOrPhone ;
+    loginRequestModel?.email = emailOrPhone ;
+    loginRequestModel?.password = password ;
+    loginRequestModel?.deviceMacAddress = 'l0:f2:8c:zf:m3:0y' ;
+
+    if(emailOrPhone.isNotEmpty && password.isNotEmpty){
+      try {
+        String? code ;
+        LoginViewModel loginViewModel =  ref.read(loginProvider) ;
+        loginViewModel.login(loginRequestModel).then((responseModel){
+          code = responseModel?.code ;
+          print('code: $code');
+
+          if(code == '200' ){
+            Fluttertoast.showToast(msg: 'success ' , toastLength: Toast.LENGTH_LONG);
+            Navigator.pushReplacementNamed(context, Routes.homeRoute);
+          }
+          else {
+            Fluttertoast.showToast(msg: 'wrong credentials ',
+                toastLength: Toast.LENGTH_LONG);
+          }
+        } );
+
+      } catch(e){
+        Fluttertoast.showToast(msg: 'UnAuthorised ' , toastLength: Toast.LENGTH_LONG);
+      }
+    }
+    else{
+      Fluttertoast.showToast(msg: 'required empty field' , toastLength: Toast.LENGTH_LONG);
+    }
+  }
 
   @override
   void didChangeDependencies() {
@@ -56,6 +100,7 @@ class _LoginViewState extends State<LoginView> {
                  Container(
                    margin: const EdgeInsets.only(top: AppMargin.m30),
                   child:   TextField(
+                    controller: _emailOrPhoneController,
                   //  cursorColor: ColorManager.primary,
                     textAlignVertical: TextAlignVertical.center,
                     decoration: InputDecoration(
@@ -69,6 +114,7 @@ class _LoginViewState extends State<LoginView> {
                 Container(
                   margin: const EdgeInsets.symmetric( vertical: AppMargin.m14),
                   child:  TextField(
+                    controller: _passwordController,
                     textAlignVertical: TextAlignVertical.center,
                     decoration: InputDecoration(
                         prefixIcon: const Icon(Icons.lock),
@@ -88,18 +134,22 @@ class _LoginViewState extends State<LoginView> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        width: AppSize.s160,
-                        height: AppSize.s50,
-                        margin: const EdgeInsets.only(bottom: AppMargin.m40),
-                        child: ElevatedButton(
-                          onPressed: (){
-
-                          },
-                          style: Theme.of(context).elevatedButtonTheme.style,
-                          child: Text(AppStrings.signIn.tr()),
-                        ),
-                      ),
+                     Consumer(
+                       builder: (_ , ref , child){
+                         return  Container(
+                           width: AppSize.s160,
+                           height: AppSize.s50,
+                           margin: const EdgeInsets.only(bottom: AppMargin.m40),
+                           child: ElevatedButton(
+                             onPressed: ()async{
+                               signIn(ref) ;
+                             },
+                             style: Theme.of(context).elevatedButtonTheme.style,
+                             child: Text(AppStrings.signIn.tr()),
+                           ),
+                         );
+                       },
+                     ),
                        Text(
                          AppStrings.dontHaveAnAccount.tr(),
                          style: Theme.of(context).textTheme.headline2,
@@ -121,5 +171,12 @@ class _LoginViewState extends State<LoginView> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _passwordController.dispose() ;
+    _emailOrPhoneController.dispose() ;
+    super.dispose();
   }
 }

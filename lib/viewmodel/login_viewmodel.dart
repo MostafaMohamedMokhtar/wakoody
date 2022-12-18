@@ -17,9 +17,11 @@ class LoginViewModel extends ChangeNotifier {
   LoginViewModel(this.loginRepo);
 
 
-  Future<void> login(LoginRequestModel loginRequestModel) async{
+  Future<LoginResponseModel?> login(LoginRequestModel? loginRequestModel) async{
     responseModel = await loginRepo?.login(loginRequestModel);
+    print('responseModel : ${responseModel?.code}');
     notifyListeners();
+    return responseModel ;
   } // end login()
 
 } // end class

@@ -9,7 +9,14 @@ final deviceMacAddressProvider = ChangeNotifierProvider<DeviceMacAddress>((ref) 
 });
 
 class DeviceMacAddress extends ChangeNotifier{
-  String? platformVersion;
+  static const channel  = MethodChannel("com.mokh.getMac");
+
+  Future<String> getMac() async{
+    String macAddress = await channel.invokeMethod("getMac");
+    notifyListeners() ;
+    return macAddress ;
+  }
+/*  String? platformVersion;
 
   Future<void> initPlatformState() async {
     try {
@@ -19,5 +26,5 @@ class DeviceMacAddress extends ChangeNotifier{
       platformVersion = 'Failed to get Device MAC Address.';
     }
     notifyListeners() ;
-  } // end initPlatformState()
+  }*/ // end initPlatformState()
 } // end class

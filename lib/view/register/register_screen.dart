@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator_platform_interface/src/models/position.dart';
+import 'package:mac_address/mac_address.dart';
 import 'package:wakoody/model/register/register_request_model.dart';
 import 'package:wakoody/model/register/register_response_model.dart';
 import 'package:wakoody/network/register_service.dart';
@@ -13,6 +14,7 @@ import 'package:wakoody/utils/locator.dart';
 import 'package:wakoody/utils/mac_address.dart';
 import 'package:wakoody/utils/resources/assets_manager.dart';
 import 'package:wakoody/utils/resources/color_manager.dart';
+import 'package:wakoody/utils/resources/routes_manager.dart';
 import 'package:wakoody/utils/resources/strings_manager.dart';
 import 'package:wakoody/utils/resources/values_manager.dart';
 import 'package:wakoody/viewmodel/register_viewmodel.dart';
@@ -40,6 +42,7 @@ class RegisterViewState extends ConsumerState<RegisterView> {
       registerViewModel = ref.read(registerProvider);
       registerViewModel?.loadImage();
     });
+   // ref.read(deviceMacAddressProvider).initPlatformState();
     super.initState();
   }
 
@@ -50,8 +53,14 @@ class RegisterViewState extends ConsumerState<RegisterView> {
     RegisterRequestModel requestModel  = RegisterRequestModel() ;
     // = locator<RegisterRequestModel>();
 
-    String? platformMacAddress = ref.watch(deviceMacAddressProvider).platformVersion;
-    print('macAddress: $platformMacAddress');
+   // String? platformMacAddress = await GetMac.macAddress;
+  /*  String? platformMacAddress ;
+    ref.read(deviceMacAddressProvider).getMac().then((value){
+      platformMacAddress = value ;
+    });*/
+
+  //  String? platformMacAddress = ref.watch(deviceMacAddressProvider).platformVersion;
+  //   print('///////////////macAddress: $platformMacAddress');
 
     requestModel.name = customerNameController.text ;
     requestModel.password = passwordController.text ;
@@ -62,7 +71,7 @@ class RegisterViewState extends ConsumerState<RegisterView> {
     }
     requestModel.latitude = myPosition?.latitude.toString();
     requestModel.longitude = myPosition?.longitude.toString();
-    requestModel.macAddress = platformMacAddress ;
+   // requestModel.macAddress = platformMacAddress ;
 
    await registerViewModel?.register(requestModel);
 
@@ -267,6 +276,7 @@ class RegisterViewState extends ConsumerState<RegisterView> {
                               child: ElevatedButton(
                                 onPressed: () async{
                                   await _bind() ;
+                                  Navigator.pushNamed(context, Routes.otpRoute);
                                   print('mokh correct');
                                 },
                                 style:

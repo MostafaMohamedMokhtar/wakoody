@@ -10,12 +10,15 @@ abstract class RegisterDataRepository {
 }
 
 class RegisterDataRepositoryImp extends RegisterDataRepository {
-  static const String endpoint = 'signup';
+  static const String endPoint = 'signup';
+
+  /// Mock endPoint
+ // static const String endPoint = 'register';
 
   @override
   Future<RegisterResponseModel?> register(RegisterRequestModel registerRequestModel) async {
     final http.Response response = await http.post(
-        Uri.parse(Constant.baseUrl + endpoint),
+        Uri.parse(Constant.baseUrl + endPoint),
         headers: {
           'Content-Type': 'application/json;charset=UTF-8',
           'Charset': 'utf-8' ,

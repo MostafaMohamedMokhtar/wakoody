@@ -13,9 +13,19 @@ final otpProvider = ChangeNotifierProvider<OtpViewModel>((ref) {
 class OtpViewModel extends ChangeNotifier {
   OtpDataRepository? otpRepo  ;
   OtpResponseModel? responseModel  ;
+  bool _isFinished = false ;
 
   OtpViewModel(this.otpRepo);
 
+  set setTime(bool isFinished){
+    _isFinished = isFinished ;
+    notifyListeners();
+  }
+
+  bool get getTime{
+    notifyListeners();
+    return _isFinished ;
+  }
 
   Future<void> verifyOtp(OtpRequestModel otpRequestModel) async{
     responseModel = await otpRepo?.verifyOtp(otpRequestModel);

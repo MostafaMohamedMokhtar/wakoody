@@ -26,6 +26,7 @@
   "verification": "Verification",
   "retry_again": "Retry again",
   "error_occurred": "An Error Occurred",
+  "resend_code" : "Resend Code",
   "ok": "Ok",
   "invalid_user_name": "Invalid User Name",
   "invalid_mobile_number": "Invalid Mobile Number",

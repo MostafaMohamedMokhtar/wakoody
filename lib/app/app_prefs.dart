@@ -9,7 +9,7 @@ const String PREFS_KEY_IS_USER_LOGGED_IN = "PREFS_KEY_IS_USER_LOGGED_IN";
 const String PREFS_KEY_TOKEN = "PREFS_KEY_TOKEN";
 
 class AppPreferences {
-  final SharedPreferences _sharedPreferences;
+  final SharedPreferences _sharedPreferences ;
 
   AppPreferences(this._sharedPreferences);
 
@@ -47,8 +47,8 @@ class AppPreferences {
     }
   }
 
-  Future<void> setUserToken(String token) async {
-    _sharedPreferences.setString(PREFS_KEY_TOKEN, token);
+  Future<void> setUserToken(String? token) async {
+    _sharedPreferences.setString(PREFS_KEY_TOKEN, token!);
   }
 
   Future<String> getUserToken() async {

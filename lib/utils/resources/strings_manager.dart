@@ -17,6 +17,7 @@ class AppStrings {
   static const String signInWelcomeText = "sign_in_welcome_text";
   static const String signUpWelcomeText = "sign_up_welcome_text";
   static const String otpWelcomeText = "otp_welcome_text";
+  static const String resendOtp = "resend_code";
   static const String password = "password_hint";
   static const String confirmPassword = "confirm_password_hint";
   static const String signIn = "signIn_button";
