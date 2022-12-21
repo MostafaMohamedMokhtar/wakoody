@@ -19,6 +19,7 @@ class AppStrings {
   static const String otpWelcomeText = "otp_welcome_text";
   static const String resendOtp = "resend_code";
   static const String password = "password_hint";
+  static const String hello = "hello_text";
   static const String confirmPassword = "confirm_password_hint";
   static const String signIn = "signIn_button";
   static const String signUp = "signUp_button";
@@ -31,6 +32,10 @@ class AppStrings {
   static const String retry_again = "retry_again";
   static const String ok = "ok";
   static const String emailHint = 'email_hint';
+  static const String phoneHint = 'phone_hint';
+  static const String passwordLength = 'password_length';
+  static const String passwordsNotEqual = 'passwords_not_equal';
+  static const String requiredEmptyFields = 'required_empty_fields';
   static const String locationHint = 'location_hint';
   static const String accessLocation = 'access_location';
   static const String allow = 'allow';
@@ -46,8 +51,12 @@ class AppStrings {
   static const String register = "register";
   static const String haveAccount = "already_have_account";
   static const String home = "home";
+  static const String pending = "pending";
+  static const String inProgress = "inProgress";
+  static const String done = "done";
   static const String notifications = "notification";
   static const String search = "search";
+  static const String createNewOrder = "create_new_order";
   static const String settings = "settings";
   static const String services = "services";
   static const String stores = "stores";

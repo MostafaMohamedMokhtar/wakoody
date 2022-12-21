@@ -18,6 +18,7 @@ class ColorManager {
   //static Color otpBorder= HexColor.fromHex("#0a9396");
   static Color grey7= HexColor.fromHex("#e9ecef");
   static Color grey8= HexColor.fromHex("#dee2e6");
+  static Color pink= HexColor.fromHex("#BF8685");
 }
 
 extension HexColor on Color {

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wakoody/utils/resources/color_manager.dart';
 import 'package:wakoody/utils/resources/font_manager.dart';
+import 'package:wakoody/utils/resources/routes_manager.dart';
 import 'package:wakoody/utils/resources/strings_manager.dart';
 import 'package:wakoody/utils/resources/values_manager.dart';
 import 'package:pinput/pinput.dart';
@@ -116,7 +117,9 @@ class _OtpViewState extends State<OtpView> {
           width: AppSize.s14,
         ),
         showCursor: true,
-        onSubmitted: (String pin) {},
+        onSubmitted: (String pin) {
+
+        },
         autofillHints: const ['0', '0', '0', '0'],
         focusNode: focusNode,
         androidSmsAutofillMethod: AndroidSmsAutofillMethod.smsUserConsentApi,

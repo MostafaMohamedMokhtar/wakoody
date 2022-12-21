@@ -22,20 +22,22 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
 
-  final TextEditingController _emailOrPhoneController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
 
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
   LoginRequestModel? loginRequestModel = LoginRequestModel() ;
 
   Future<void> signIn(WidgetRef ref) async{
-    String emailOrPhone = _emailOrPhoneController.text.trim() ;
+    String email = _emailController.text.trim() ;
     String password = _passwordController.text.trim();
-    loginRequestModel?.phoneNumber = emailOrPhone ;
-    loginRequestModel?.email = emailOrPhone ;
+    String phone = _phoneController.text.trim();
+    loginRequestModel?.phoneNumber = phone ;
+    loginRequestModel?.email = email ;
     loginRequestModel?.password = password ;
-    loginRequestModel?.deviceMacAddress = 'l0:f2:8c:zf:m3:0y' ;
+  //  loginRequestModel?.deviceMacAddress = 'l0:f2:8c:zf:m3:0y' ;
 
-    if(emailOrPhone.isNotEmpty && password.isNotEmpty){
+    if(email.isNotEmpty && password.isNotEmpty && phone.isNotEmpty){
       try {
         String? code ;
         LoginViewModel loginViewModel =  ref.read(loginProvider) ;
@@ -58,9 +60,9 @@ class _LoginViewState extends State<LoginView> {
       }
     }
     else{
-      Fluttertoast.showToast(msg: 'required empty field' , toastLength: Toast.LENGTH_LONG);
+      Fluttertoast.showToast(msg: AppStrings.requiredEmptyFields.tr() , toastLength: Toast.LENGTH_LONG);
     }
-  }
+  } // end signIn()
 
   @override
   void didChangeDependencies() {
@@ -79,7 +81,7 @@ class _LoginViewState extends State<LoginView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                  SizedBox(
-                    height: MediaQuery.of(context).size.height *.15
+                    height: MediaQuery.of(context).size.height *.1
                 ),
                  Text(
                     AppStrings.signIn ,
@@ -92,27 +94,39 @@ class _LoginViewState extends State<LoginView> {
                     color: ColorManager.primary,
                   ),
                 ),
-                const SizedBox(height: AppSize.s40,),
+                const SizedBox(height: AppSize.s20,),
                  Text(
                     AppStrings.signInWelcomeText.tr() ,
                     style: Theme.of(context).textTheme.subtitle1,
                 ),
                  Container(
-                   margin: const EdgeInsets.only(top: AppMargin.m30),
+                   margin: const EdgeInsets.only(top: AppMargin.m40 , bottom: AppMargin.m10),
                   child:   TextField(
-                    controller: _emailOrPhoneController,
+                    controller: _emailController,
                   //  cursorColor: ColorManager.primary,
                     textAlignVertical: TextAlignVertical.center,
                     decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.mail),
-                      hintText: AppStrings.emailOrPhone.tr() ,
+                      hintText: AppStrings.emailHint.tr() ,
                       disabledBorder: InputBorder.none
                     ),
                   ),
                 ),
-                const SizedBox(height: AppSize.s40,),
+               // const SizedBox(height: AppSize.s20,),
                 Container(
-                  margin: const EdgeInsets.symmetric( vertical: AppMargin.m14),
+                  margin: const EdgeInsets.symmetric( vertical: AppMargin.m20),
+                  child:  TextField(
+                    controller: _phoneController,
+                    textAlignVertical: TextAlignVertical.center,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.phone_android),
+                      hintText: AppStrings.phoneHint.tr() ,
+                    ),
+                  ),
+                ),
+               // const SizedBox(height: AppSize.s40,),
+                Container(
+                  margin: const EdgeInsets.symmetric( vertical: AppMargin.m20),
                   child:  TextField(
                     controller: _passwordController,
                     textAlignVertical: TextAlignVertical.center,
@@ -143,6 +157,7 @@ class _LoginViewState extends State<LoginView> {
                            child: ElevatedButton(
                              onPressed: ()async{
                                signIn(ref) ;
+                               Navigator.pushNamed(context, Routes.homeRoute);
                              },
                              style: Theme.of(context).elevatedButtonTheme.style,
                              child: Text(AppStrings.signIn.tr()),
@@ -176,7 +191,8 @@ class _LoginViewState extends State<LoginView> {
   @override
   void dispose() {
     _passwordController.dispose() ;
-    _emailOrPhoneController.dispose() ;
+    _emailController.dispose() ;
+    _phoneController.dispose() ;
     super.dispose();
   }
 }

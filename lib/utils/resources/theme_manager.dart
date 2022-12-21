@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:wakoody/utils/resources/color_manager.dart';
 import 'package:wakoody/utils/resources/font_manager.dart';
 import 'package:wakoody/utils/resources/styles_manager.dart';
@@ -30,9 +31,10 @@ ThemeData getApplicationTheme() {
           centerTitle: true,
           color: ColorManager.primary,
           elevation: AppSize.s4,
-          shadowColor: ColorManager.primaryOpacity70,
+          shadowColor: ColorManager.primary,
           titleTextStyle: getRegularStyle(
-              color: ColorManager.white, fontSize: FontSize.s16)),
+              color: ColorManager.white, fontSize: FontSize.s40) ,
+      ),
       // Button theme
       buttonTheme: ButtonThemeData(
           shape: const StadiumBorder(),
@@ -68,18 +70,20 @@ ThemeData getApplicationTheme() {
               color: ColorManager.black, fontSize: FontSize.s16),
           headline3:
           getSemiBoldStyle(
-              color: ColorManager.black, fontSize: FontSize.s16),
+              color: ColorManager.white, fontSize: FontSize.s25),
           headline4: getBoldStyle(
               color: ColorManager.black, fontSize: FontSize.s14),
           subtitle1: getMediumStyle(
               color: ColorManager.black, fontSize: FontSize.s16),
           subtitle2: getMediumStyle(
               color: ColorManager.primary, fontSize: FontSize.s16),
+        headline6: getRegularStyle(
+            color: ColorManager.white, fontSize: FontSize.s16),
           headline5: getMediumStyle(
               color: ColorManager.grey2, fontSize: FontSize.s16),
-          bodyText2: getMediumStyle(color: ColorManager.lightGrey),
+          bodyText2: getBoldStyle(color: ColorManager.white , fontSize: FontSize.s16),
           caption: getRegularStyle(color: ColorManager.grey1),
-          bodyText1: getRegularStyle(color: ColorManager.grey) ,
+          bodyText1: getBoldStyle(color: ColorManager.white , fontSize: FontSize.s20),
       ),
       dialogTheme: DialogTheme(
         backgroundColor: ColorManager.white ,

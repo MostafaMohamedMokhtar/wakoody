@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:wakoody/app/constant.dart';
 import 'package:wakoody/model/register/register_request_model.dart';
 import 'package:wakoody/model/register/register_response_model.dart';
@@ -26,11 +28,15 @@ class RegisterDataRepositoryImp extends RegisterDataRepository {
         },
         body: jsonEncode(registerRequestModel.toJson()));
         print('response = $response');
-      if(response.statusCode == 200 ) {
-        Map<String, dynamic> parsedData = jsonDecode(response.body);
-        print('parsed === : $parsedData');
-        return RegisterResponseModel.fromJson(parsedData);
-      }
-      return null ;
+     try{
+        if(response.statusCode == 200 || response.statusCode == 201 ) {
+       Map<String, dynamic> parsedData = jsonDecode(response.body);
+       debugPrint('parsed === : $parsedData');
+       return RegisterResponseModel.fromJson(parsedData);
+        }
+     }catch(e){
+       debugPrint('/// error : $e');
+     }
+
   } // end register()
 } // end class

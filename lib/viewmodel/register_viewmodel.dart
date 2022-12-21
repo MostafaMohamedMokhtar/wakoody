@@ -7,10 +7,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wakoody/model/register/register_request_model.dart';
 import 'package:wakoody/model/register/register_response_model.dart';
 import 'package:wakoody/network/register_service.dart';
-import 'package:wakoody/utils/locator.dart';
+import 'package:wakoody/viewmodel/login_viewmodel.dart';
 
 final registerProvider = ChangeNotifierProvider<RegisterViewModel>((ref) {
-
   return RegisterViewModel(RegisterDataRepositoryImp());
 });
 
@@ -25,9 +24,11 @@ class RegisterViewModel extends ChangeNotifier {
   File? image;
   SharedPreferences? preferences;
 
-  Future<void> register(RegisterRequestModel registerRequestModel) async{
+  Future<RegisterResponseModel?> register(RegisterRequestModel registerRequestModel) async{
     responseModel = await registerRepo?.register(registerRequestModel);
+    print('responseModel : ${responseModel?.data}');
     notifyListeners();
+    return responseModel ;
 }
 
   void saveImage(String? path) async {
