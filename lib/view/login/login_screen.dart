@@ -47,7 +47,7 @@ class _LoginViewState extends State<LoginView> {
 
           if(code == '200' ){
             Fluttertoast.showToast(msg: 'success ' , toastLength: Toast.LENGTH_LONG);
-            Navigator.pushReplacementNamed(context, Routes.homeRoute);
+            Navigator.pushReplacementNamed(context, Routes.billsRoute);
           }
           else {
             Fluttertoast.showToast(msg: 'wrong credentials ',
@@ -157,7 +157,7 @@ class _LoginViewState extends State<LoginView> {
                            child: ElevatedButton(
                              onPressed: ()async{
                                signIn(ref) ;
-                               Navigator.pushNamed(context, Routes.homeRoute);
+                               Navigator.pushNamed(context, Routes.billsRoute);
                              },
                              style: Theme.of(context).elevatedButtonTheme.style,
                              child: Text(AppStrings.signIn.tr()),

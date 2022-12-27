@@ -22,13 +22,14 @@ dependencies:
   geolocator: ^9.0.2  # get the location
   fluttertoast: ^8.1.1 # show toast message on the screen
   file_picker: ^5.2.3
-#  path_provider: ^2.0.11
 #  image_gallery_saver: ^1.7.1
   image_picker: ^0.8.6 # for save and get images to file
   get_it: ^7.2.0  # for dependency injection
   mac_address: ^1.0.0 # get macAddress of the device
   #get_mac_address: ^0.0.2 # get macAddress of the device
   pinput: ^2.2.16 # for OTP verification
+  pdf: ^3.8.4 #for creation pdf file
+  path_provider: ^2.0.11 #create a path for pdf file
 
 dev_dependencies:
   flutter_test:

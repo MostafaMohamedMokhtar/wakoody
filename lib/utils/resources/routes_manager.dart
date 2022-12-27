@@ -2,7 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:wakoody/utils/resources/strings_manager.dart';
-import 'package:wakoody/view/home/home.dart';
+import 'package:wakoody/view/bills/bill_details.dart';
+import 'package:wakoody/view/bills/bills.dart';
 import 'package:wakoody/view/login/login_screen.dart';
 import 'package:wakoody/view/otp/otp_screen.dart';
 import 'package:wakoody/view/register/register_screen.dart';
@@ -15,8 +16,8 @@ class Routes {
   static const String registerRoute = "/register";
   static const String forgotPasswordRoute = "/forgotPassword";
   static const String mainRoute = "/main";
-  static const String homeRoute = "/home";
-  static const String storeDetailsRoute = "/storeDetails";
+  static const String billsRoute = "/bills";
+  static const String billDetailsRoute = "/billDetails";
 }
 
 class RouteGenerator {
@@ -32,13 +33,12 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) =>  const RegisterView());
       case Routes.otpRoute:
         return MaterialPageRoute(builder: (_) => const OtpView());
-      case Routes.homeRoute:
+      case Routes.billsRoute:
        // initRegisterModule();
-        return MaterialPageRoute(builder: (_) => const HomeView());
-     /* case Routes.forgotPasswordRoute:
-        initForgotPasswordModule();
-        return MaterialPageRoute(builder: (_) => ForgotPasswordView());
-      case Routes.mainRoute:
+        return MaterialPageRoute(builder: (_) => const BillsView());
+      case Routes.billDetailsRoute:
+        return MaterialPageRoute(builder: (_) => const BillDetailsView());
+   /*   case Routes.mainRoute:
         initHomeModule();
         return MaterialPageRoute(builder: (_) => MainView());
       case Routes.storeDetailsRoute:

@@ -82,7 +82,7 @@ ThemeData getApplicationTheme() {
           headline5: getMediumStyle(
               color: ColorManager.grey2, fontSize: FontSize.s16),
           bodyText2: getBoldStyle(color: ColorManager.white , fontSize: FontSize.s16),
-          caption: getRegularStyle(color: ColorManager.grey1),
+          caption: getRegularStyle(color: ColorManager.grey1, fontSize: FontSize.s14),
           bodyText1: getBoldStyle(color: ColorManager.white , fontSize: FontSize.s20),
       ),
       dialogTheme: DialogTheme(

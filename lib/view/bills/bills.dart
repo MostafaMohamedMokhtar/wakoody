@@ -1,18 +1,20 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:wakoody/utils/resources/color_manager.dart';
+import 'package:wakoody/utils/resources/routes_manager.dart';
 import 'package:wakoody/utils/resources/strings_manager.dart';
 import 'package:wakoody/utils/resources/values_manager.dart';
 
-class HomeView extends StatefulWidget {
-  const HomeView({Key? key}) : super(key: key);
+class BillsView extends StatefulWidget {
+  const BillsView({Key? key}) : super(key: key);
 
   @override
-  State<HomeView> createState() => _HomeViewState();
+  State<BillsView> createState() => _BillsViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _BillsViewState extends State<BillsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -165,10 +167,11 @@ class _HomeViewState extends State<HomeView> {
             ),
           ),
           Container(
-            width: MediaQuery.of(context).size.width ,
+            width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height * .08,
-            margin: const EdgeInsets.only(top: AppMargin.m20),
-            padding: const EdgeInsets.symmetric(horizontal: AppPadding.p15 , vertical: AppPadding.p2),
+            margin: const EdgeInsets.only(top: AppMargin.m20 ,/* bottom: AppMargin.m20*/),
+            padding: const EdgeInsets.symmetric(
+                horizontal: AppPadding.p15, vertical: AppPadding.p2),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(AppSize.s15),
               // color: Colors.black
@@ -187,13 +190,18 @@ class _HomeViewState extends State<HomeView> {
                   suffixIcon: Container(
                     width: MediaQuery.of(context).size.width * .13,
                     margin: const EdgeInsets.only(
-                        bottom: AppMargin.m2 , left: AppMargin.m8 ,
-                    right: AppMargin.m8 , top: AppMargin.m4),
+                        bottom: AppMargin.m2,
+                        left: AppMargin.m8,
+                        right: AppMargin.m8,
+                        top: AppMargin.m4),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(AppSize.s10),
                       color: ColorManager.primary,
                     ),
-                    child: Icon(Icons.search , color: ColorManager.white,),
+                    child: Icon(
+                      Icons.search,
+                      color: ColorManager.white,
+                    ),
                   ),
                   hintText: AppStrings.search.tr(),
                   border: InputBorder.none,
@@ -205,26 +213,82 @@ class _HomeViewState extends State<HomeView> {
               ),
             ),
           ),
+          Expanded(
+            child: Container(
+             // color: Colors.tealAccent,
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * .48,
+              padding: const EdgeInsets.symmetric(
+                  horizontal: AppPadding.p15),
+              child: ListView.builder(
+                itemCount: 15,
+                  itemBuilder: (ctx , index){
+                    return GestureDetector(
+                      onTap: (){
+                        Fluttertoast.showToast(msg: 'pressed' , toastLength : Toast.LENGTH_LONG);
+                        Navigator.pushNamed(context, Routes.billDetailsRoute);
+                      },
+                      child: Card(
+                      //  color: ColorManager.primary,
+                        shadowColor: ColorManager.grey7,
+                        elevation: 4,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(AppSize.s15),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(AppPadding.p20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text('Mostafa' , style: Theme.of(context).textTheme.subtitle1,),
+                                  Text('#123546823974152' , style: Theme.of(context).textTheme.subtitle2,)
+                                ],
+                              ),
+                               Text('22-9-2022' ,
+                              style: Theme.of(context).textTheme.headline5,),
+                               Text('the quick brown for jumps over a lazy dog  , DJs flack by when MTV or quiz prog' ,
+                                  style: Theme.of(context).textTheme.caption,),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ) ;
+
+                     /* ListTile(
+                      onTap: (){},
+                      title: Text('WayBills' , style: Theme.of(context).textTheme.subtitle1,),
+                      subtitle: const Text('22-9-2022'),
+                      leading: const Text('the quick brown for jumps over a lazy dog  , DJs flack by when MTV or quiz prog'),
+                    );*/
+                  }
+              ),
+            ),
+          ),
         ],
       ),
-      floatingActionButton: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height * .09,
-        child: FloatingActionButton(
-          isExtended: true,
-          backgroundColor: ColorManager.primary,
-          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(AppSize.s15)
-                  , topRight:  Radius.circular(AppSize.s15))
+      bottomNavigationBar: BottomAppBar(
+        child: InkWell(
+          onTap: () {},
+          child: Container(
+            alignment: Alignment.center,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * .09,
+            decoration: BoxDecoration(
+              color: ColorManager.primary,
+              borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(AppSize.s15),
+                  topRight: Radius.circular(AppSize.s15)),
+            ),
+            child: Text(
+              AppStrings.createNewOrder.tr(),
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
           ),
-          onPressed: (){},
-          child: Text(AppStrings.createNewOrder.tr() ,
-            style: Theme.of(context).textTheme.bodyText1,),
         ),
       ),
-      floatingActionButtonLocation:
-      FloatingActionButtonLocation.centerDocked,
     );
   }
 }
