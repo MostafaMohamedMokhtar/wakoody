@@ -30,6 +30,7 @@ dependencies:
   pinput: ^2.2.16 # for OTP verification
   pdf: ^3.8.4 #for creation pdf file
   path_provider: ^2.0.11 #create a path for pdf file
+  permission_handler: ^10.2.0 # request user permission
 
 dev_dependencies:
   flutter_test:

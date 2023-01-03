@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:wakoody/utils/request_permission.dart';
 import 'package:wakoody/utils/resources/color_manager.dart';
 import 'package:wakoody/utils/resources/strings_manager.dart';
 import 'package:wakoody/utils/resources/values_manager.dart';
@@ -309,14 +311,17 @@ class _BillDetailsViewState extends State<BillDetailsView> {
         child: InkWell(
           onTap: () async {
             createPdfInvoice();
-            final output = await getTemporaryDirectory();
+           bool downloaded =  await savePdf() ;
+           /* final output = await getTemporaryDirectory();
             //  final output = await getExternalStorageDirectory();
             String fullPath = '${output.path}/invoice.pdf';
             debugPrint('mokh path : $fullPath');
             final file = File(fullPath);
-            await file.writeAsBytes(await pdf.save());
-            Fluttertoast.showToast(
-                msg: 'downloaded', toastLength: Toast.LENGTH_LONG);
+            await file.writeAsBytes(await pdf.save());*/
+            if(downloaded){
+              Fluttertoast.showToast(
+                  msg: 'invoice downloaded', toastLength: Toast.LENGTH_LONG);
+            }
           },
           child: Container(
             alignment: Alignment.center,
@@ -336,6 +341,63 @@ class _BillDetailsViewState extends State<BillDetailsView> {
         ),
       ),
     );
+  }
+
+  Future<bool> savePdf() async {
+    Directory directory;
+    try {
+      if (Platform.isAndroid) {
+        if (await requestPermission(Permission.storage)) {
+          directory = (await getExternalStorageDirectory())!;
+          String newPath = "";
+          print(directory);
+          List<String>? paths = directory.path.split("/");
+          for (int x = 1; x < paths.length; x++) {
+            String folder = paths[x];
+            if (folder != "Android") {
+              newPath += "/$folder";
+            } else {
+              break;
+            }
+          }
+          newPath = "$newPath/WakoodyApp";
+          directory = Directory(newPath);
+          String fullPath = '${directory.path}/invoice.pdf';
+          debugPrint('mokh path : $fullPath');
+          final file = File(fullPath);
+          await file.writeAsBytes(await pdf.save());
+        } else {
+          return false;
+        }
+      } else {
+        if (await requestPermission(Permission.photos)) {
+          directory = await getTemporaryDirectory();
+        } else {
+          return false;
+        }
+      }
+
+      if (!await directory.exists()) {
+        await directory.create(recursive: true);
+      }
+     /* if (await directory.exists()) {
+        File saveFile = File(directory.path + "/$fileName");
+        await dio.download(url, saveFile.path,
+            onReceiveProgress: (value1, value2) {
+              setState(() {
+                progress = value1 / value2;
+              });
+            });
+        if (Platform.isIOS) {
+          await ImageGallerySaver.saveFile(saveFile.path,
+              isReturnPathOfIOS: true);
+        }
+        return true;
+      }*/
+    } catch (e) {
+      print(e);
+    }
+    return false;
   }
 
   createPdfInvoice(){

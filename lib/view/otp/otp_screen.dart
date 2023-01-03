@@ -57,33 +57,30 @@ class _OtpViewState extends State<OtpView> {
                       children: [
                         animatedBorders(),
                         TweenAnimationBuilder(
-                         //  key: ValueKey(questionId),
+                          key: ValueKey(isFinished),
                           tween: Tween(begin: AppTimer.t30, end: AppTimer.t0),
                           duration: const Duration(seconds: AppTimer.t30s),
                           builder: (context, double value, child) => Text(
                             "00:${value.toInt()}",
-                            style: (!isFinished)
-                                ?Theme.of(context).textTheme.subtitle2
-                            :Theme.of(context).textTheme.headline5,
+                            style: (isFinished)
+                            ?Theme.of(context).textTheme.headline5 // grey
+                            :Theme.of(context).textTheme.subtitle2 // primary
                           ),
                           onEnd: (){
-                             /*setState(() {
-                               isFinished = true ;
-                             });*/
+                           //  isFinished = true ;
                              ref.watch(otpProvider).setTime = true ;
                           },
                         ),
                         TextButton(
                             onPressed: (isFinished) ?() {
-                               ref.watch(otpProvider).setTime = false ;
-                             /* setState(() {
-                                isFinished = false ;
-                              });*/
-                            }:null,
+                              ref.watch(otpProvider).setTime = false ;
+                             // isFinished = false ;
+                            }:(){},
                             child: Text(
                               AppStrings.resendOtp.tr(),
-                              style: (!isFinished) ? Theme.of(context).textTheme.headline5
-                              :Theme.of(context).textTheme.subtitle2 ,
+                              style: (isFinished)
+                              ?Theme.of(context).textTheme.subtitle2  // primary
+                                  : Theme.of(context).textTheme.headline5 // grey
                             ))
                       ],
                     );

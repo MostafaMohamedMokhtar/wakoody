@@ -31,13 +31,13 @@ class RegisterViewModel extends ChangeNotifier {
     return responseModel ;
 }
 
-  void saveImage(String? path) async {
+   saveImage(String? path) async {
     preferences = await SharedPreferences.getInstance();
     preferences?.setString("imagePath", path!);
     notifyListeners();
   } // end saveImage()
 
-  void loadImage() async {
+   loadImage() async {
     preferences = await SharedPreferences.getInstance();
     imagePath = preferences?.getString("imagePath");
     notifyListeners();

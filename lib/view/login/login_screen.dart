@@ -99,7 +99,7 @@ class _LoginViewState extends State<LoginView> {
                     AppStrings.signInWelcomeText.tr() ,
                     style: Theme.of(context).textTheme.subtitle1,
                 ),
-                 Container(
+              /*   Container(
                    margin: const EdgeInsets.only(top: AppMargin.m40 , bottom: AppMargin.m10),
                   child:   TextField(
                     controller: _emailController,
@@ -111,10 +111,11 @@ class _LoginViewState extends State<LoginView> {
                       disabledBorder: InputBorder.none
                     ),
                   ),
-                ),
+                ),*/
                // const SizedBox(height: AppSize.s20,),
                 Container(
-                  margin: const EdgeInsets.symmetric( vertical: AppMargin.m20),
+                //  margin: const EdgeInsets.symmetric( vertical: AppMargin.m20),
+                  margin: const EdgeInsets.only(top: AppMargin.m50 , bottom: AppMargin.m20),
                   child:  TextField(
                     controller: _phoneController,
                     textAlignVertical: TextAlignVertical.center,
