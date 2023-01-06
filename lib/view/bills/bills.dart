@@ -12,14 +12,14 @@ import 'package:wakoody/view/bills/body_panels/inprogress_panel.dart';
 import 'package:wakoody/view/bills/body_panels/pending_panel.dart';
 import 'package:wakoody/viewmodel/bills_viewmodel.dart';
 
-class BillsView extends StatefulWidget {
-  const BillsView({Key? key}) : super(key: key);
+class LogisticsBillsView extends StatefulWidget {
+  const LogisticsBillsView({Key? key}) : super(key: key);
 
   @override
-  State<BillsView> createState() => _BillsViewState();
+  State<LogisticsBillsView> createState() => _LogisticsBillsViewState();
 }
 
-class _BillsViewState extends State<BillsView> {
+class _LogisticsBillsViewState extends State<LogisticsBillsView> {
  // int index = 0 ;
   @override
   Widget build(BuildContext context) {

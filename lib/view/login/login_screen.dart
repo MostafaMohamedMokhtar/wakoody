@@ -158,7 +158,8 @@ class _LoginViewState extends State<LoginView> {
                            child: ElevatedButton(
                              onPressed: ()async{
                                signIn(ref) ;
-                               Navigator.pushNamed(context, Routes.billsRoute);
+                              // Navigator.pushNamed(context, Routes.billsRoute);
+                               Navigator.pushNamed(context, Routes.homeRoute);
                              },
                              style: Theme.of(context).elevatedButtonTheme.style,
                              child: Text(AppStrings.signIn.tr()),

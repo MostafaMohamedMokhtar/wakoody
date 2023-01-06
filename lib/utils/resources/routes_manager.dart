@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:wakoody/utils/resources/strings_manager.dart';
 import 'package:wakoody/view/bills/bill_details.dart';
 import 'package:wakoody/view/bills/bills.dart';
+import 'package:wakoody/view/home/home.dart';
 import 'package:wakoody/view/login/login_screen.dart';
 import 'package:wakoody/view/otp/otp_screen.dart';
 import 'package:wakoody/view/register/register_screen.dart';
@@ -18,6 +19,10 @@ class Routes {
   static const String mainRoute = "/main";
   static const String billsRoute = "/bills";
   static const String billDetailsRoute = "/billDetails";
+  static const String logisticsRoute = "/logistics";
+  static const String cargoRoute = "/cargo";
+  static const String towRoute = "/tow";
+  static const String homeRoute = "/home";
 }
 
 class RouteGenerator {
@@ -35,9 +40,17 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const OtpView());
       case Routes.billsRoute:
        // initRegisterModule();
-        return MaterialPageRoute(builder: (_) => const BillsView());
+        return MaterialPageRoute(builder: (_) => const LogisticsBillsView());
       case Routes.billDetailsRoute:
         return MaterialPageRoute(builder: (_) => const BillDetailsView());
+      case Routes.homeRoute:
+        return MaterialPageRoute(builder: (_) => const HomeView());
+      case Routes.towRoute:
+        return MaterialPageRoute(builder: (_) => const HomeView());
+      case Routes.logisticsRoute:
+        return MaterialPageRoute(builder: (_) => const LogisticsBillsView());
+      case Routes.cargoRoute:
+        return MaterialPageRoute(builder: (_) => const HomeView());
    /*   case Routes.mainRoute:
         initHomeModule();
         return MaterialPageRoute(builder: (_) => MainView());

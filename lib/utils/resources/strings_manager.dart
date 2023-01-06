@@ -50,7 +50,7 @@ class AppStrings {
   static const String viewPhoto = "view_photo";
   static const String register = "register";
   static const String haveAccount = "already_have_account";
-  static const String home = "bills";
+  static const String home = "home";
   static const String pending = "pending";
   static const String inProgress = "inProgress";
   static const String done = "done";
@@ -80,6 +80,9 @@ class AppStrings {
   static const String contactUs = "contact_us";
   static const String inviteYourFriends = "invite_your_friends";
   static const String logout = "logout";
+  static const String cargo = "cargo";
+  static const String tow = "tow";
+  static const String logistics = "logistics";
 
   // error handler
   static const String badRequestError = "bad_request_error";
