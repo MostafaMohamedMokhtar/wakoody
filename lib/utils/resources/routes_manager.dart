@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:wakoody/utils/resources/strings_manager.dart';
 import 'package:wakoody/view/bills/bill_details.dart';
 import 'package:wakoody/view/bills/bills.dart';
+import 'package:wakoody/view/bills/order_create.dart';
 import 'package:wakoody/view/home/home.dart';
 import 'package:wakoody/view/login/login_screen.dart';
 import 'package:wakoody/view/otp/otp_screen.dart';
@@ -23,6 +24,7 @@ class Routes {
   static const String cargoRoute = "/cargo";
   static const String towRoute = "/tow";
   static const String homeRoute = "/home";
+  static const String orderCreateRoute = "/orderCreate";
 }
 
 class RouteGenerator {
@@ -51,6 +53,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const LogisticsBillsView());
       case Routes.cargoRoute:
         return MaterialPageRoute(builder: (_) => const HomeView());
+      case Routes.orderCreateRoute:
+        return MaterialPageRoute(builder: (_) => const OrderCreateView());
    /*   case Routes.mainRoute:
         initHomeModule();
         return MaterialPageRoute(builder: (_) => MainView());

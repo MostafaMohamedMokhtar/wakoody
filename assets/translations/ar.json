@@ -74,6 +74,8 @@
   "cargo": "شحن سياره",
   "tow": "شحن سطحه",
   "logistics": "شحن بضائع",
+  "car_transport" : "نقل السيارات",
+  "transport_date" : "موعد النقل",
   "bad_request_error": "طلب غير صالح. حاول مرة أخرى لاحقًا",
   "forbidden_error": "طلب محظور. حاول مرة أخرى لاحقًا",
   "unauthorized_error": "مستخدم غير مصرح له , حاول مرة أخرى لاحقًا",

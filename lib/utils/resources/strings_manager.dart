@@ -83,6 +83,8 @@ class AppStrings {
   static const String cargo = "cargo";
   static const String tow = "tow";
   static const String logistics = "logistics";
+  static const String carTransport = "car_transport";
+  static const String transportDate = "transport_date";
 
   // error handler
   static const String badRequestError = "bad_request_error";

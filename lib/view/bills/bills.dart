@@ -243,7 +243,9 @@ class _LogisticsBillsViewState extends State<LogisticsBillsView> {
       ),
       bottomNavigationBar: BottomAppBar(
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).pushNamed(Routes.orderCreateRoute);
+          },
           child: Container(
             alignment: Alignment.center,
             width: MediaQuery.of(context).size.width,

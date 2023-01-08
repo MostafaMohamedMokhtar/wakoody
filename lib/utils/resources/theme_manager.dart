@@ -32,8 +32,8 @@ ThemeData getApplicationTheme() {
           color: ColorManager.primary,
           elevation: AppSize.s4,
           shadowColor: ColorManager.primary,
-          titleTextStyle: getRegularStyle(
-              color: ColorManager.white, fontSize: FontSize.s40) ,
+          titleTextStyle: getBoldStyle(
+              color: ColorManager.white, fontSize: FontSize.s20) ,
       ),
       // Button theme
       buttonTheme: ButtonThemeData(

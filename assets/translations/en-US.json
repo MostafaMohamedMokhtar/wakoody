@@ -74,6 +74,8 @@
   "cargo": "Cargo",
   "tow": "Tow",
   "logistics": "Logistics",
+  "car_transport" : "Car Transport",
+  "transport_date" : "Transport Date",
   "bad_request_error": "bad request. try again later",
   "forbidden_error": "forbidden request. try again later",
   "unauthorized_error": "user unauthorized, try again later",
