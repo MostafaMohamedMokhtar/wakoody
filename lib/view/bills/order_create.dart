@@ -12,6 +12,18 @@ class OrderCreateView extends StatefulWidget {
 }
 
 class _OrderCreateViewState extends State<OrderCreateView> {
+  String dropdownvalue1 = 'Riyadh';
+  String dropdownvalue2 = 'Al-Kharj';
+
+  // List of items in our dropdown menu
+  var cities = [
+    'Riyadh',
+    'Al-Kharj',
+    'Al-Dammam',
+    'Jeddah',
+    'Makkah',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +57,76 @@ class _OrderCreateViewState extends State<OrderCreateView> {
                 // Do something with the selected date
               },
               focusNode: FocusNode(),
-            )
+            ),
+            const SizedBox(
+              height: AppSize.s30,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width * .4,
+                  padding: const EdgeInsets.all(AppPadding.p8),
+                //  color: Colors.yellow,
+                  child: DropdownButton(
+                    isExpanded: true,
+
+                    // Initial Value
+                    value: dropdownvalue1,
+
+                    // Down Arrow Icon
+                    icon: const Icon(Icons.keyboard_arrow_down),
+
+                    // Array list of items
+                    items: cities.map((String city) {
+                      return DropdownMenuItem(
+                        value: city,
+                        child: Text(city),
+                      );
+                    }).toList(),
+                    // After selecting the desired option,it will
+                    // change button value to selected value
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        dropdownvalue1 = newValue!;
+                      });
+                    },
+                  ),
+                ),
+                const SizedBox(width: AppSize.s30,),
+                Container(
+                  width: MediaQuery.of(context).size.width * .4,
+                 padding: const EdgeInsets.all(AppPadding.p8),
+                //  color: Colors.lightBlue,
+                  child: DropdownButton(
+                    isExpanded: true,
+                    // Initial Value
+                    value: dropdownvalue2,
+
+                    // Down Arrow Icon
+                    icon: const Icon(Icons.keyboard_arrow_down),
+
+                    // Array list of items
+                    items: cities.map((String city) {
+                      return DropdownMenuItem(
+                        value: city,
+                        child: Text(city),
+                      );
+                    }).toList(),
+                    // After selecting the desired option,it will
+                    // change button value to selected value
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        dropdownvalue2 = newValue!;
+                      });
+                    },
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: AppSize.s15,),
+            Text(AppStrings.transportDate.tr() ,
+              style: Theme.of(context).textTheme.headline4,),
           ],
         ),
       ),
