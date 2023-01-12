@@ -226,7 +226,7 @@ class _LogisticsBillsViewState extends State<LogisticsBillsView> {
                           color: ColorManager.white,
                         ),
                       ),
-                      hintText: AppStrings.search.tr(),
+                      hintText: AppStrings.searchByNumber.tr(),
                       border: InputBorder.none,
                       focusedBorder: InputBorder.none,
                       enabledBorder: InputBorder.none,

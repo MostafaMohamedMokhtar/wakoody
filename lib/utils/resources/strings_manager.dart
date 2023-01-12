@@ -55,7 +55,7 @@ class AppStrings {
   static const String inProgress = "inProgress";
   static const String done = "done";
   static const String notifications = "notification";
-  static const String search = "search";
+  static const String searchByNumber = "search_by_number";
   static const String createNewOrder = "create_new_order";
   static const String invoice = "invoice_title";
   static const String billTo = "bill-to";
@@ -85,6 +85,9 @@ class AppStrings {
   static const String logistics = "logistics";
   static const String carTransport = "car_transport";
   static const String transportDate = "transport_date";
+  static const String oneCar = "one_car";
+  static const String carsGroup = "cars_group";
+  static const String search = "search";
 
   // error handler
   static const String badRequestError = "bad_request_error";
